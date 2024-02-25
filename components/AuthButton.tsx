@@ -1,47 +1,35 @@
 // "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import Link from "next/link";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 // import { signOut } from "@/utils/supabase/serversignout";
 
 export default async function AuthButton() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  // 由于我们移除了登录功能，以下认证相关的代码将不再需要
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  const signOut = async () => {
-    "use server";
+  // 登出功能也将被移除
+  // const signOut = async () => {
+  //   "use server";
 
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-    await supabase.auth.signOut();
+  //   const cookieStore = cookies();
+  //   const supabase = createClient(cookieStore);
+  //   await supabase.auth.signOut();
 
-    return redirect("/login");
-  };
+  //   return redirect("/login");
+  // };
 
-  return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
-      {/* <div className="vip-icon bg-yellow-400 text-white p-2 rounded-full shadow-lg animate-pulse">
-        VIP
-      </div> */}
-      <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Logout
-        </button>
-      </form>
+  // 由于不再需要检查用户是否登录，我们可以简化返回的JSX结构
+  return (
+    // 移除了所有登录和登出的UI元素，此处可以放置非认证相关的内容或完全留空
+    <div>
+      {/* 在这里添加不需要用户登录的内容 */}
     </div>
-  ) : (
-    <Link
-      href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-    >
-      Login
-    </Link>
   );
 }
